@@ -29,4 +29,10 @@ describe('Gilded Rose', function () {
         expect(items[0].quality).to.equal(8);
     });
 
+    it('quality does not become negative', function() {
+        const gildedRose = new GildedRose([ new Item('foo', 10, 0)]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].quality).to.equal(0);
+    })
+
 });
