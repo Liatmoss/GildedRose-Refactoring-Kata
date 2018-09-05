@@ -1,5 +1,7 @@
 const legendaryItems = ['Sulfuras, Hand of Ragnaros'];
-const specialItems = ['Aged Brie', 'Backstage passes to a TAFKAL80ETC concert']
+const specialItems = ['Aged Brie', 'Backstage passes to a TAFKAL80ETC concert'];
+const minQuality = 0;
+const maxQuality = 50;
 
 export class Item {
     name: string;
@@ -25,7 +27,7 @@ export class GildedRose {
             let item = this.items[i];
             this.updateItemQuality(item);
             this.updateItemSellIn(item);
-            this.updateExpiredItems(item);
+            this.updateExpiredItem(item);
         }
 
         return this.items;
@@ -33,20 +35,20 @@ export class GildedRose {
 
     updateItemQuality(i: Item) {
         if (this.isNormalItem(i.name)) {
-            if (i.quality > 0) {
+            if (i.quality > minQuality) {
                     i.quality = i.quality - 1
             }
         } else if (!this.isLegendaryItem(i.name)) {
-            if (i.quality < 50) {
+            if (i.quality < maxQuality) {
                 i.quality = i.quality + 1
                 if (i.name == 'Backstage passes to a TAFKAL80ETC concert') {
                     if (i.sellIn < 11) {
-                        if (i.quality < 50) {
+                        if (i.quality < maxQuality) {
                             i.quality = i.quality + 1
                         }
                     }
                     if (i.sellIn < 6) {
-                        if (i.quality < 50) {
+                        if (i.quality < maxQuality) {
                             i.quality = i.quality + 1
                         }
                     }
@@ -61,14 +63,14 @@ export class GildedRose {
         }
     }
 
-    updateExpiredItems(i: Item) {
-        if (i.sellIn < 0) {
+    updateExpiredItem(i: Item) {
+        if (i.sellIn < minQuality) {
             if (this.isNormalItem(i.name)) {
-                if (i.quality > 0) {
+                if (i.quality > minQuality) {
                     i.quality = i.quality - 1
                 }
             } else if (i.name === 'Aged Brie') {
-                if (i.quality < 50) {
+                if (i.quality < maxQuality) {
                     i.quality = i.quality + 1
                 }
             } else if (i.name === 'Backstage passes to a TAFKAL80ETC concert') {
