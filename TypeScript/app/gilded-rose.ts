@@ -35,9 +35,7 @@ export class GildedRose {
 
     updateItemQuality(i: Item) {
         if (this.isNormalItem(i.name)) {
-            if (i.quality > minQuality) {
-                    i.quality = i.quality - 1
-            }
+            this.decrementQuality(i);
         } else if (!this.isLegendaryItem(i.name)) {
             if (i.quality < maxQuality) {
                 i.quality = i.quality + 1
@@ -66,13 +64,9 @@ export class GildedRose {
     updateExpiredItem(i: Item) {
         if (i.sellIn < minQuality) {
             if (this.isNormalItem(i.name)) {
-                if (i.quality > minQuality) {
-                    i.quality = i.quality - 1
-                }
+                this.decrementQuality(i);
             } else if (i.name === 'Aged Brie') {
-                if (i.quality < maxQuality) {
-                    i.quality = i.quality + 1
-                }
+                this.incrementQuality(i);
             } else if (i.name === 'Backstage passes to a TAFKAL80ETC concert') {
                 i.quality = 0;
             }
@@ -88,5 +82,17 @@ export class GildedRose {
 
     isLegendaryItem(name: string): boolean {
             return legendaryItems.indexOf(name) > -1;
+    }
+
+    decrementQuality(i: Item) {
+        if(i.quality > minQuality) {
+            i.quality = i.quality - 1;
+        }
+    }
+
+    incrementQuality(i: Item) {
+        if(i.quality < maxQuality) {
+            i.quality = i.quality + 1;
+        }
     }
 }
