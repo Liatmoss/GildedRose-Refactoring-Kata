@@ -35,10 +35,10 @@ export class GildedRose {
         if(this.isLegendaryItem(name)) {
             return new Rules.LegendaryItemRules();
         }
-        else if(name === 'Aged Brie') {
+        else if(this.isTypeOfItem(name, 'Aged Brie')) {
             return new Rules.AgedBrieItemRules();
         }
-        else if(name === 'Backstage passes to a TAFKAL80ETC concert') {
+        else if(this.isTypeOfItem(name, 'Backstage passes to a TAFKAL80ETC concert')) {
             return new Rules.BackstagePassItemRules();
         }
         
@@ -50,6 +50,15 @@ export class GildedRose {
     }
 
     isLegendaryItem(name: string): boolean {
-            return legendaryItems.indexOf(name) > -1;
+        for(let j = 0; j < legendaryItems.length; j = j + 1) {
+            if(this.isTypeOfItem(name, legendaryItems[j])) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    isTypeOfItem(name: string, itemType: string): boolean {
+        return name.indexOf(itemType) > -1;
     }
 }
