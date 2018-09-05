@@ -35,4 +35,16 @@ describe('Gilded Rose', function () {
         expect(items[0].quality).to.equal(0);
     })
 
+    it('Aged Brie increases in quality the older it gets', function () {
+        const gildedRose = new GildedRose([ new Item('Aged Brie', 10, 10)]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].quality).to.equal(11);
+    })
+
+    it('quality cannot increase beyond 50', function () {
+        const gildedRose = new GildedRose([ new Item('Aged Brie', 10, 50)]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].quality).to.equal(50);
+    })
+
 });
