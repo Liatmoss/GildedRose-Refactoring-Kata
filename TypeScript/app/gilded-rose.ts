@@ -1,19 +1,9 @@
+import { Item } from '../app/item';
+
 const legendaryItems = ['Sulfuras, Hand of Ragnaros'];
 const specialItems = ['Aged Brie', 'Backstage passes to a TAFKAL80ETC concert'];
 const minQuality = 0;
 const maxQuality = 50;
-
-export class Item {
-    name: string;
-    sellIn: number;
-    quality: number;
-
-    constructor(name, sellIn, quality) {
-        this.name = name;
-        this.sellIn = sellIn;
-        this.quality = quality;
-    }
-}
 
 export class GildedRose {
     items: Array<Item>;

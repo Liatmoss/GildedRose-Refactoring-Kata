@@ -1,6 +1,7 @@
 import 'mocha';
 import { expect } from 'chai';
-import { Item, GildedRose } from '../app/gilded-rose';
+import { Item } from '../app/item';
+import { GildedRose } from '../app/gilded-rose';
 
 function testSellIn(testItem: Item, expectedSellIn: number) {
     //Arrange
