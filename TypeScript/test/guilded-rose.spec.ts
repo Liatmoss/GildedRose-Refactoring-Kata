@@ -100,6 +100,30 @@ describe('Gilded Rose', function () {
 
         })
 
+        describe('Conjured item tests', function() {
+
+            it('decays in quality twice as fast before expiring', function() {
+                testQuality(new Item('Conjured foo', 10, 10), 8);
+            })
+
+            it('decays in quality twice as fast after expiring', function() {
+                testQuality(new Item('Conjured foo', 0, 10), 6);
+            })
+
+            it('conjured special items change in quality twice as fast before expiring', function() {
+                testQuality(new Item('Conjured Aged Brie', 10, 10), 12);
+            })
+
+            it('conjured special items change in quality twice as fast after expiring', function() {
+                testQuality(new Item('Conjured Aged Brie', 10, 10), 14);
+            })
+
+            it('conjured legendary items do not need to be sold or lose value', function() {
+                testBoth(new Item('Conjured Sulfuras, Hand of Ragnaros', 10, 10), 10, 10);
+            })
+
+        })
+
     })
 
 });
