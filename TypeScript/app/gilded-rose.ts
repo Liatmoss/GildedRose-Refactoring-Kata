@@ -1,3 +1,6 @@
+const legendaryItems = ['Sulfuras, Hand of Ragnaros'];
+const specialItems = ['Aged Brie', 'Backstage passes to a TAFKAL80ETC concert']
+
 export class Item {
     name: string;
     sellIn: number;
@@ -78,7 +81,7 @@ export class GildedRose {
     }
 
     isNormalItem(name: string): boolean {
-        if(name === 'Aged Brie' || name === 'Backstage passes to a TAFKAL80ETC concert' || name === 'Sulfuras, Hand of Ragnaros') {
+        if(specialItems.indexOf(name) > -1 || legendaryItems.indexOf(name) > -1) {
             return false;
         }
         return true;
