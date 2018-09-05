@@ -115,7 +115,7 @@ describe('Gilded Rose', function () {
             })
 
             it('conjured special items change in quality twice as fast after expiring', function() {
-                testQuality(new Item('Conjured Aged Brie', 10, 10), 14);
+                testQuality(new Item('Conjured Aged Brie', 0, 10), 14);
             })
 
             it('conjured legendary items do not need to be sold or lose value', function() {

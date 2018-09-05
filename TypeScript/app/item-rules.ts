@@ -1,4 +1,5 @@
 import { Item } from '../app/item';
+import { calculateModifier } from './item-modifiers';
 
 const minQuality = 0;
 const maxQuality = 50;
@@ -75,12 +76,12 @@ export class BackstagePassItemRules implements ItemRules {
 
 function decrementQuality(i: Item): void {
     if(i.quality > minQuality) {
-        i.quality = i.quality - 1;
+        i.quality = i.quality - calculateModifier(i.name);
     }
 }
 
 function incrementQuality(i: Item): void {
     if(i.quality < maxQuality) {
-        i.quality = i.quality + 1;
+        i.quality = i.quality + calculateModifier(i.name);
     }
 }
