@@ -4,55 +4,55 @@ const minQuality = 0;
 const maxQuality = 50;
 
 export interface ItemRules {
-    updateItemQuality(Item): void;
-    updateItemSellIn(Item): void;
-    updateItemQualityExpired(Item): void;
+    updateQuality(Item): void;
+    updateSellIn(Item): void;
+    updateQualityExpired(Item): void;
 }
 
 export class DefaultItemRules implements ItemRules {
-    updateItemQuality(i: Item): void {
+    updateQuality(i: Item): void {
         decrementQuality(i);
     }
 
-    updateItemSellIn(i: Item): void {
+    updateSellIn(i: Item): void {
         i.sellIn = i.sellIn - 1;
     }
 
-    updateItemQualityExpired(i: Item): void {
+    updateQualityExpired(i: Item): void {
         decrementQuality(i); 
     }
 }
 
 export class LegendaryItemRules implements ItemRules {
-    updateItemQuality(i: Item): void {
+    updateQuality(i: Item): void {
         return;
     }
 
-    updateItemSellIn(i: Item): void {
+    updateSellIn(i: Item): void {
         return;
     }
 
-    updateItemQualityExpired(i: Item): void {
+    updateQualityExpired(i: Item): void {
         return; 
     }
 }
 
 export class AgedBrieItemRules implements ItemRules {
-    updateItemQuality(i: Item): void {
+    updateQuality(i: Item): void {
         incrementQuality(i);
     }
 
-    updateItemSellIn(i: Item): void {
+    updateSellIn(i: Item): void {
         i.sellIn = i.sellIn - 1;
     }
 
-    updateItemQualityExpired(i: Item): void {
+    updateQualityExpired(i: Item): void {
         incrementQuality(i);
     }
 }
 
 export class BackstagePassItemRules implements ItemRules {
-    updateItemQuality(i: Item): void {
+    updateQuality(i: Item): void {
         incrementQuality(i);
 
         if (i.sellIn < 11) {
@@ -64,11 +64,11 @@ export class BackstagePassItemRules implements ItemRules {
         }
     }
 
-    updateItemSellIn(i: Item): void {
+    updateSellIn(i: Item): void {
         i.sellIn = i.sellIn - 1;
     }
 
-    updateItemQualityExpired(i: Item): void {
+    updateQualityExpired(i: Item): void {
         i.quality = 0;
     }
 }

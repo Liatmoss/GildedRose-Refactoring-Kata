@@ -13,19 +13,21 @@ export class GildedRose {
     updateQuality(): Array<Item> {
 
         for (let i = 0; i < this.items.length; i++) {
-
             let item = this.items[i];
-            
-            let itemRules = this.getItemRules(item.name);
-
-            itemRules.updateItemQuality(item);
-            itemRules.updateItemSellIn(item);
-            if(item.sellIn < 0) {
-                itemRules.updateItemQualityExpired(item);
-            }
+            this.updateItemQuality(item);
         }
 
         return this.items;
+    }
+
+    updateItemQuality(item: Item): void {
+        let itemRules = this.getItemRules(item.name);
+
+        itemRules.updateQuality(item);
+        itemRules.updateSellIn(item);
+        if(this.isExpired(item)) {
+            itemRules.updateQualityExpired(item);
+        }
     }
 
     getItemRules(name: string): Rules.ItemRules {
@@ -41,6 +43,10 @@ export class GildedRose {
         }
         
         return new Rules.DefaultItemRules();
+    }
+    
+    isExpired(i: Item) {
+        return i.sellIn < 0;
     }
 
     isLegendaryItem(name: string): boolean {
