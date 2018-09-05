@@ -3,7 +3,7 @@ import { Item } from '../app/item';
 const minQuality = 0;
 const maxQuality = 50;
 
-interface ItemRules {
+export interface ItemRules {
     updateItemQuality(Item): void;
     updateItemSellIn(Item): void;
     updateItemQualityExpired(Item): void;

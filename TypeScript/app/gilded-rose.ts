@@ -2,7 +2,6 @@ import { Item } from './item';
 import * as Rules from './item-rules';
 
 const legendaryItems = ['Sulfuras, Hand of Ragnaros'];
-const specialItems = ['Aged Brie', 'Backstage passes to a TAFKAL80ETC concert'];
 
 export class GildedRose {
     items: Array<Item>;
@@ -12,19 +11,12 @@ export class GildedRose {
     }
 
     updateQuality(): Array<Item> {
+
         for (let i = 0; i < this.items.length; i++) {
+
             let item = this.items[i];
             
-            let itemRules = new Rules.DefaultItemRules();
-            if(this.isLegendaryItem(item.name)) {
-                itemRules = new Rules.LegendaryItemRules();
-            }
-            else if(item.name === 'Aged Brie') {
-                itemRules = new Rules.AgedBrieItemRules();
-            }
-            else if(item.name === 'Backstage passes to a TAFKAL80ETC concert') {
-                itemRules = new Rules.BackstagePassItemRules();
-            }
+            let itemRules = this.getItemRules(item.name);
 
             itemRules.updateItemQuality(item);
             itemRules.updateItemSellIn(item);
@@ -36,11 +28,19 @@ export class GildedRose {
         return this.items;
     }
 
-    isNormalItem(name: string): boolean {
-        if(specialItems.indexOf(name) > -1 || legendaryItems.indexOf(name) > -1) {
-            return false;
+    getItemRules(name: string): Rules.ItemRules {
+
+        if(this.isLegendaryItem(name)) {
+            return new Rules.LegendaryItemRules();
         }
-        return true;
+        else if(name === 'Aged Brie') {
+            return new Rules.AgedBrieItemRules();
+        }
+        else if(name === 'Backstage passes to a TAFKAL80ETC concert') {
+            return new Rules.BackstagePassItemRules();
+        }
+        
+        return new Rules.DefaultItemRules();
     }
 
     isLegendaryItem(name: string): boolean {
