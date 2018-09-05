@@ -22,7 +22,7 @@ export class GildedRose {
         this.items = items;
     }
 
-    updateQuality() {
+    updateQuality(): Array<Item> {
         for (let i = 0; i < this.items.length; i++) {
             let item = this.items[i];
             this.updateItemQuality(item);
@@ -33,7 +33,7 @@ export class GildedRose {
         return this.items;
     }
 
-    updateItemQuality(i: Item) {
+    updateItemQuality(i: Item): void {
         if (this.isNormalItem(i.name)) {
             this.decrementQuality(i);
         } else if (!this.isLegendaryItem(i.name)) {
@@ -55,13 +55,13 @@ export class GildedRose {
         }
     }
 
-    updateItemSellIn(i: Item) {
+    updateItemSellIn(i: Item): void {
         if (!this.isLegendaryItem(i.name)) {
             i.sellIn = i.sellIn - 1;
         }
     }
 
-    updateExpiredItem(i: Item) {
+    updateExpiredItem(i: Item): void {
         if (i.sellIn < minQuality) {
             if (this.isNormalItem(i.name)) {
                 this.decrementQuality(i);
@@ -84,13 +84,13 @@ export class GildedRose {
             return legendaryItems.indexOf(name) > -1;
     }
 
-    decrementQuality(i: Item) {
+    decrementQuality(i: Item): void {
         if(i.quality > minQuality) {
             i.quality = i.quality - 1;
         }
     }
 
-    incrementQuality(i: Item) {
+    incrementQuality(i: Item): void {
         if(i.quality < maxQuality) {
             i.quality = i.quality + 1;
         }
