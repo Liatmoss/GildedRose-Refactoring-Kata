@@ -1,5 +1,7 @@
 ﻿using NUnit.Framework;
 using System.Collections.Generic;
+using System.Linq;
+using FluentAssertions;
 
 namespace csharp
 {
@@ -7,12 +9,18 @@ namespace csharp
     public class GildedRoseTest
     {
         [Test]
-        public void foo()
+        public void UpdateQuality_ForGeneralItem_ShouldContainTheCorrectItem()
         {
-            IList<Item> Items = new List<Item> { new Item { Name = "foo", SellIn = 0, Quality = 0 } };
-            GildedRose app = new GildedRose(Items);
-            app.UpdateQuality();
-            Assert.AreEqual("fixme", Items[0].Name);
+            var itemName = "foo";
+            var gildedRose = new GildedRose(new List<Item>
+            {
+                new Item(itemName, 0, 0)
+            });
+
+            gildedRose.UpdateQuality();
+
+            gildedRose.GetItems().Should().HaveCount(1);
+            gildedRose.GetItems().Single().Name.Should().Be(itemName);
         }
     }
 }
