@@ -35,10 +35,7 @@ namespace csharp
             {
                 if (item.Quality > 0)
                 {
-                    if (item.Name != "Sulfuras, Hand of Ragnaros")
-                    {
-                        item.Quality = item.Quality - 1;
-                    }
+                    DecreaseQualityIfNotLegendary(item);
                 }
             }
             else
@@ -70,7 +67,7 @@ namespace csharp
 
             if (item.Name != "Sulfuras, Hand of Ragnaros")
             {
-                item.SellIn = item.SellIn - 1;
+                DecreaseItemSellinIfNotLegendary(item);
             }
 
             if (item.SellIn < 0)
@@ -117,6 +114,13 @@ namespace csharp
                 item.Quality -= 1;
             }
         }
+
+        private void DecreaseItemSellinIfNotLegendary(Item item)
+        {
+            if (!IsLegendary(item))
+                item.SellIn -= 1;
+        }
+
     }
 
 }
